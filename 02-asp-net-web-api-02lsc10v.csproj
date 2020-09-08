@@ -5,5 +5,9 @@
     <RootNamespace>_02_asp_net_web_api_02lsc10v</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
+  </ItemGroup>
+
 
 </Project>
