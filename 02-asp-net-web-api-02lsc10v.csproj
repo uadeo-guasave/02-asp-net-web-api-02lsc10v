@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_02_asp_net_web_api_02lsc10v</RootNamespace>
+  </PropertyGroup>
+
+
+</Project>
