@@ -22,10 +22,12 @@ namespace _02_asp_net_web_api_02lsc10v.Models
           .HasForeignKey(b => b.CategoryId);
 
         book.Property(p => p.Id).HasColumnName("id");
+        book.Property(p => p.AmazonId).HasColumnName("amazon_id");
         book.Property(p => p.Filename).HasColumnName("filename");
         book.Property(p => p.ImageUrl).HasColumnName("image_url");
         book.Property(p => p.Title).HasColumnName("title");
         book.Property(p => p.Author).HasColumnName("author");
+        book.Property(p => p.CategoryId).HasColumnName("category_id");
       });
 
       modelBuilder.Entity<Category>(cat =>

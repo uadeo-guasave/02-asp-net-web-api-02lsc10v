@@ -11,13 +11,12 @@
 "[CATEGORY ID]",
 "[CATEGORY]"
 
-books
-id
-filename
-image_url
-title
-author
-
-categories
-id
-name
+create table libros (
+  book_id integer primary key,
+  filename varchar(50),
+  image_url varchar(200),
+  title varchar(300),
+  author varchar(100),
+  category_id integer,
+  category_name varchar(100)
+)
