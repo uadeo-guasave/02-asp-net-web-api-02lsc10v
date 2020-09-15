@@ -15,7 +15,7 @@ namespace _02_asp_net_web_api_02lsc10v
   {
     public static void Main(string[] args)
     {
-      CrearBaseDeDatos();
+      // CrearBaseDeDatos();
       CreateHostBuilder(args).Build().Run();
     }
 
