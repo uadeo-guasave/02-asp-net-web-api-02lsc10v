@@ -15,28 +15,7 @@ namespace _02_asp_net_web_api_02lsc10v
   {
     public static void Main(string[] args)
     {
-      // CrearBaseDeDatos();
       CreateHostBuilder(args).Build().Run();
-    }
-
-    private static void CrearBaseDeDatos()
-    {
-      using (var db = new AmazonDbContext())
-      {
-        try
-        {
-          db.Database.EnsureCreated();
-          var libros = db.Books.Include(b => b.Category).ToList().Take(10);
-          foreach (var libro in libros)
-          {
-            System.Console.WriteLine($"Libro: {libro.Title}, Categoría: {libro.Category.Name}");
-          }
-        }
-        catch (Exception ex)
-        {
-          System.Console.WriteLine(ex.Message);
-        }
-      }
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
