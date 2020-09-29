@@ -19,6 +19,9 @@ namespace _02_asp_net_web_api_02lsc10v.Controllers
       _db = db;
     }
 
+    public bool BookExists(int id) =>
+      _db.Books.Any(b => b.Id == id);
+
     // API RESTful
     // CRUD=SQL=HTTP_METHOD
     // Create=Insert=POST Read=Select=GET Update=Update=PUT Delete=Delete=DELETE
@@ -33,7 +36,7 @@ namespace _02_asp_net_web_api_02lsc10v.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> GetAllBooks()
     {
-      var books = await _db.Books.Take(10).ToListAsync();
+      var books = await _db.Books.Take(1000).ToListAsync();
 
       if (books == null)
       {
@@ -72,16 +75,41 @@ namespace _02_asp_net_web_api_02lsc10v.Controllers
         return BadRequest();
       }
 
-      _db.Books.Find(id).CategoryId = book.CategoryId;
+      // _db.Books.Find(id).CategoryId = book.CategoryId;
+      _db.Entry(book).State = EntityState.Modified;
 
-      try {
+      try
+      {
         await _db.SaveChangesAsync();
       }
       catch (DbUpdateConcurrencyException)
       {
-        // el libro existe
-        // viole alguna restricción de la base
+        if (!BookExists(id))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw;
+        }
       }
+
+      return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<Book>> DeleteBook(int id)
+    {
+      var book = await _db.Books.FindAsync(id);
+      if (book == null)
+      {
+        return NotFound();
+      }
+
+      _db.Books.Remove(book);
+      await _db.SaveChangesAsync();
+
+      return book;
     }
   }
 }
