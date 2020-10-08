@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace _02_asp_net_web_api_02lsc10v.Controllers
 {
   [ApiController]
+  // https://localhost:5001/api/books
   [Route("api/books")]
   public class BookController : ControllerBase
   {
