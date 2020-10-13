@@ -49,7 +49,7 @@ namespace _02_asp_net_web_api_02lsc10v.Controllers
 
     // api/books/1
     [HttpGet("{id}")]
-    public async Task<ActionResult<Book>> GetBookById(int id)
+    public async Task<ActionResult<Book>> GetBookById([FromRoute] int id)
     {
       var book = await _db.Books.FindAsync(id);
       if (book == null)

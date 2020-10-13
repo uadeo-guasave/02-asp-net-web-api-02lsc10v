@@ -16,6 +16,12 @@ namespace _02_asp_net_web_api_02lsc10v.Models
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+      modelBuilder.Entity<User>(user =>
+      {
+        user.HasIndex(u => u.Name).IsUnique();
+        user.HasIndex(u => u.Email).IsUnique();
+      });
+
       modelBuilder.Entity<Book>(book =>
       {
         book.HasOne(b => b.Category)
