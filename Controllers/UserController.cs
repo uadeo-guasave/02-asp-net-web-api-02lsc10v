@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using _02_asp_net_web_api_02lsc10v.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace _02_asp_net_web_api_02lsc10v.Controllers
 {
@@ -36,7 +37,7 @@ namespace _02_asp_net_web_api_02lsc10v.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult<User>> Create([FromBody] User newUser)
+    public async Task<ActionResult<User>> Create([FromBody, BindRequired] User newUser)
     {
       TryValidateModel(newUser);
 
