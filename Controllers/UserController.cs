@@ -39,12 +39,13 @@ namespace _02_asp_net_web_api_02lsc10v.Controllers
     [HttpPost]
     public async Task<ActionResult<User>> Create([FromBody, BindRequired] User newUser)
     {
-      TryValidateModel(newUser);
-
       if (NameExists(newUser.Name) || EmailExists(newUser.Email))
       {
-        return UnprocessableEntity();
+        return UnprocessableEntity(new { error = "Nombre de usuario o correo no disponible." });
       }
+
+      TryValidateModel(newUser);
+
 
       _db.Users.Add(newUser);
       await _db.SaveChangesAsync();

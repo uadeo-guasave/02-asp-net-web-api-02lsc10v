@@ -46,21 +46,7 @@ namespace _02_asp_net_web_api_02lsc10v.Models
         yield return new ValidationResult("El campo Name debe contenter solo letras.", new[] { nameof(Name) });
       }
 
-      if (NameExists(Name))
-      {
-        yield return new ValidationResult($"El nombre de usuario {Name} no esta disponible", new[] { nameof(Name) });
-      }
-
     }
-    private readonly AmazonDbContext _db;
-
-    public User(AmazonDbContext db)
-    {
-      _db = db;
-    }
-
-    private bool NameExists(string name) =>
-      _db.Users.Any(u => u.Name == name);
 
     private int VerificarFortaleza()
     {
