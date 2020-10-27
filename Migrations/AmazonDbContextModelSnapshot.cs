@@ -16,6 +16,103 @@ namespace _02_asp_net_web_api_02lsc10v.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8");
 
+            modelBuilder.Entity("_02_asp_net_web_api_02lsc10v.Models.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AmazonId")
+                        .HasColumnName("amazon_id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Author")
+                        .HasColumnName("author")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnName("category_id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Filename")
+                        .HasColumnName("filename")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnName("image_url")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnName("title")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("_02_asp_net_web_api_02lsc10v.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnName("name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("_02_asp_net_web_api_02lsc10v.Models.Editorial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnName("address")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnName("email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("name")
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnName("phone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PostalCode")
+                        .HasColumnName("postalcode")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Website")
+                        .IsRequired()
+                        .HasColumnName("website")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("editorials");
+                });
+
             modelBuilder.Entity("_02_asp_net_web_api_02lsc10v.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -56,9 +153,23 @@ namespace _02_asp_net_web_api_02lsc10v.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("_02_asp_net_web_api_02lsc10v.Models.Book", b =>
+                {
+                    b.HasOne("_02_asp_net_web_api_02lsc10v.Models.Category", "Category")
+                        .WithMany("Books")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 #pragma warning restore 612, 618
         }
     }
